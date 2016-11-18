@@ -11,9 +11,8 @@ namespace Pacman
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Pacman pacman;
         KeyboardState keyState;
-
+        Level level;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -46,8 +45,8 @@ namespace Pacman
             graphics.ApplyChanges();
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            pacman = new Pacman();
-            pacman.Load(Content);
+            level = new Level();
+            level.Load(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -72,7 +71,8 @@ namespace Pacman
             keyState = Keyboard.GetState();
 
             // TODO: Add your update logic here
-            pacman.Update(gameTime, keyState);
+
+            level.Update(gameTime, keyState);
 
             base.Update(gameTime);
         }
@@ -86,7 +86,7 @@ namespace Pacman
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            pacman.Draw(spriteBatch);
+            level.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

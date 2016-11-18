@@ -83,7 +83,7 @@ namespace Pacman
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                if (!Level.Collision(new Vector2 (position.X-8,position.Y)))
+                if (!new Level().Collision(new Vector2 (position.X-8,position.Y)))
                 {
                     verticallyFlip = false;
                     direction = "left";
@@ -94,7 +94,7 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Right))
             {
-                if (!Level.Collision(new Vector2(position.X + 8, position.Y)))
+                if (!new Level().Collision(new Vector2(position.X + 8, position.Y)))
                 {
                     verticallyFlip = false;
                     direction = "right";
@@ -105,7 +105,7 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Up))
             {
-                if (!Level.Collision(new Vector2(position.X, position.Y - 8)))
+                if (!new Level().Collision(new Vector2(position.X, position.Y - 8)))
                 {
                     verticallyFlip = true;
                     direction = "up";
@@ -115,7 +115,7 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Down))
             {
-                if (!Level.Collision(new Vector2(position.X, position.Y + 8)))
+                if (!new Level().Collision(new Vector2(position.X, position.Y + 8)))
                 {
                     verticallyFlip = true;
                     direction = "down";
@@ -126,19 +126,19 @@ namespace Pacman
             switch (direction)
             {
                 case "left":
-                    if (!Level.Collision(new Vector2(position.X-8, position.Y)))
+                    if (!new Level().Collision(new Vector2(position.X-8, position.Y)))
                         position.X -= 1;
                     break;
                 case "right":
-                    if (!Level.Collision(new Vector2(position.X+8, position.Y)))
+                    if (!new Level().Collision(new Vector2(position.X+8, position.Y)))
                         position.X += 1;
                     break;
                 case "up":
-                    if (!Level.Collision(new Vector2(position.X, position.Y - 8)))
+                    if (!new Level().Collision(new Vector2(position.X, position.Y - 8)))
                         position.Y -= 1;
                     break;
                 case "down":
-                    if (!Level.Collision(new Vector2(position.X, position.Y + 8)))
+                    if (!new Level().Collision(new Vector2(position.X, position.Y + 8)))
                         position.Y += 1;
                     break;
                 default:
