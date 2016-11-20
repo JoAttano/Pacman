@@ -23,12 +23,18 @@ namespace Pacman
 
         public Pacman()
         {
-            position = new Vector2(50, 50);
+            position = new Vector2(150, 150);
             nFrame = 0f;
             recFrame = new Rectangle(0, 0, 16, 16);
             direction = "";
         }
-
+        public Pacman(int x, int y)
+        {
+            position = new Vector2(x, y);
+            nFrame = 0f;
+            recFrame = new Rectangle(0, 0, 16, 16);
+            direction = "";
+        }
         public void Load(ContentManager Content)
         {
             sprite = Content.Load<Texture2D>("Sprites/pacman/PacmanTileSet");
