@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TiledSharp;
 
 namespace Pacman
 {
@@ -20,6 +21,7 @@ namespace Pacman
         private float orientationSprite;
         private bool verticallyFlip;
         private bool horizontallyFlip;
+        Collision collision;
 
         public Pacman()
         {
@@ -28,16 +30,19 @@ namespace Pacman
             recFrame = new Rectangle(0, 0, 16, 16);
             direction = "";
         }
-        public Pacman(int x, int y)
+
+        public Pacman(Vector2 pPosition, Collision pCollision)
         {
-            position = new Vector2(x, y);
-            nFrame = 0f;
-            recFrame = new Rectangle(0, 0, 16, 16);
-            direction = "";
+            position = pPosition;
+            collision = pCollision;
+            
         }
         public void Load(ContentManager Content)
         {
             sprite = Content.Load<Texture2D>("Sprites/pacman/PacmanTileSet");
+            nFrame = 0f;
+            recFrame = new Rectangle(0, 0, 16, 16);
+            direction = "";
         }
 
         public void Update(GameTime gameTime, KeyboardState keyState)
@@ -89,7 +94,7 @@ namespace Pacman
 
             if (keyState.IsKeyDown(Keys.Left))
             {
-                if (!new Level().Collision(new Vector2 (position.X-8,position.Y)))
+                if (!collision.Colide(new Vector2 (position.X-8,position.Y)))
                 {
                     verticallyFlip = false;
                     direction = "left";
@@ -100,7 +105,7 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Right))
             {
-                if (!new Level().Collision(new Vector2(position.X + 8, position.Y)))
+                if (!collision.Colide(new Vector2(position.X + 8, position.Y)))
                 {
                     verticallyFlip = false;
                     direction = "right";
@@ -111,7 +116,7 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Up))
             {
-                if (!new Level().Collision(new Vector2(position.X, position.Y - 8)))
+                if (!collision.Colide(new Vector2(position.X, position.Y - 8)))
                 {
                     verticallyFlip = true;
                     direction = "up";
@@ -121,7 +126,7 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Down))
             {
-                if (!new Level().Collision(new Vector2(position.X, position.Y + 8)))
+                if (!collision.Colide(new Vector2(position.X, position.Y + 8)))
                 {
                     verticallyFlip = true;
                     direction = "down";
@@ -132,19 +137,19 @@ namespace Pacman
             switch (direction)
             {
                 case "left":
-                    if (!new Level().Collision(new Vector2(position.X-8, position.Y)))
+                    if (!collision.Colide(new Vector2(position.X-8, position.Y)))
                         position.X -= 1;
                     break;
                 case "right":
-                    if (!new Level().Collision(new Vector2(position.X+8, position.Y)))
+                    if (!collision.Colide(new Vector2(position.X+8, position.Y)))
                         position.X += 1;
                     break;
                 case "up":
-                    if (!new Level().Collision(new Vector2(position.X, position.Y - 8)))
+                    if (!collision.Colide(new Vector2(position.X, position.Y - 8)))
                         position.Y -= 1;
                     break;
                 case "down":
-                    if (!new Level().Collision(new Vector2(position.X, position.Y + 8)))
+                    if (!collision.Colide(new Vector2(position.X, position.Y + 8)))
                         position.Y += 1;
                     break;
                 default:

@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\packages\TiledSharp.0.15\lib\TiledSharp.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -25,7 +26,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/pacman/PacmanTileSet.png
 
-#begin TileMap\Border.png
+#begin TileMap/PacmanBorder.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,5 +36,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:TileMap\Border.png
+/build:TileMap/PacmanBorder.png
 

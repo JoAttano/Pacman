@@ -13,6 +13,7 @@ namespace Pacman
         SpriteBatch spriteBatch;
         KeyboardState keyState;
         Level level;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -83,7 +84,7 @@ namespace Pacman
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.Azure);
 
             // TODO: Add your drawing code here
             level.Draw(spriteBatch);
