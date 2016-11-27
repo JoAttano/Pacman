@@ -41,6 +41,7 @@
     <Compile Include="Collision.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Pacman.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +87,7 @@
   <ItemGroup>
     <None Include="Content\map\pacman.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

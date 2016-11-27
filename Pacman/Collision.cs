@@ -10,7 +10,7 @@ namespace Pacman
 {
     class Collision
     {
-        TmxMap map;
+        Map map;
         int mapWidth;
         int mapHeight;
         int tileWidth;
@@ -19,20 +19,13 @@ namespace Pacman
         int mapHeightPixel;
         int[,] tableMap;
 
-        public Collision(TmxMap pMap, int pMapWidth, int pMapHeight
-            ,int pTileWidth, int pTileHeight)
+        public Collision(Map pMap)
         {
             map = pMap;
-            mapWidth = pMapWidth;
-            mapHeight = pMapHeight;
-            tileWidth = pTileWidth;
-            tileHeight = pTileHeight;
-            mapWidthPixel = mapWidth * tileWidth;
-            mapHeightPixel = mapHeight * tileHeight;
-            CreateTable(pMap);
+            CreateTable();
         }
 
-        private void CreateTable(TmxMap pMap)
+        private void CreateTable()
         {
             tableMap = new int[36,28];
             int n = 0;
@@ -40,8 +33,7 @@ namespace Pacman
             {
                 for(int x = 0; x < 28; x++)
                 {
-                    tableMap[y, x] = pMap.Layers[0].Tiles[n].Gid;
-                    //Console.WriteLine("table {0} gid {1} y{2} x {3}",tableMap[y, x], pMap.Layers[0].Tiles[n].Gid, y, x);
+                    tableMap[y, x] = map.Tmx.Layers[0].Tiles[n].Gid;
                     n++;
                 }
                          
@@ -50,11 +42,8 @@ namespace Pacman
 
         public bool Colide(Vector2 position)
         {
-            //Console.WriteLine("x{0} y{1}",position.X, position.X);
-            int x = (((int)position.X / 8)-1);// / mapWidth;
-            int y = (((int)position.Y / 8)-1);// / mapHeight;
-            //int nPosition = (y * 26) + x;
-            //int nGid = map.Layers[0].Tiles[20].Gid;
+            int x = (((int)position.X / 8)-1);//  mapWidth;
+            int y = (((int)position.Y / 8)-1);//  mapHeight;
             bool collide = false;
 
             Console.WriteLine("x{0} y{1}",x, y);
