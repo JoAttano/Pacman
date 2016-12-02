@@ -57,7 +57,7 @@ namespace Pacman
                         TileWidth, TileHeight);
 
                     spriteBatch.Draw(tileset, new Vector2((int)x, (int)y), tilesetRec, Color.White,
-                        0f, new Vector2(-8, -8), 1f, SpriteEffects.None, 0f);
+                        0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
 
                 }
             }
