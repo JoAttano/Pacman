@@ -20,17 +20,22 @@ namespace Pacman
         public int TilesetTilesHigh { get; private set; }
         public int MapWidePixel { get; private set; }
         public int MapHighPixel { get; private set; }
+        public int MapWideTile { get; private set; }
+        public int MapHighTile { get; private set; }
 
         public void Load(ContentManager Content)
         {
             tileset = Content.Load<Texture2D>("TileMap/PacmanBorder");
-            Tmx = new TmxMap("Content/map/pacman.tmx");
+            Tmx = new TmxMap("Content/map/pacmanMap2.tmx");
             TileWidth = Tmx.Tilesets[0].TileWidth;
             TileHeight = Tmx.Tilesets[0].TileHeight;
+            MapWideTile = Tmx.Width;
+            MapHighTile = Tmx.Height;
             TilesetTilesWide = tileset.Width / TileWidth;
             TilesetTilesHigh = tileset.Height / TileHeight;
             MapWidePixel = Tmx.Width * TileWidth;
             MapHighPixel = Tmx.Height * TileHeight;
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -13,11 +13,14 @@ namespace Pacman
         Collision collision;
         Map map;
 
-        public void Load(ContentManager Content)
+        public void Load(ContentManager Content, GraphicsDeviceManager graphics)
         {
             map = new Map();
             map.Load(Content);
             collision = new Collision(map);
+            graphics.PreferredBackBufferWidth = map.MapWidePixel;
+            graphics.PreferredBackBufferHeight = map.MapHighPixel;
+            graphics.ApplyChanges();
             pacman = new Pacman(new Vector2(map.MapWidePixel /2, map.MapHighPixel /2 ), collision);
             pacman.Load(Content);
             

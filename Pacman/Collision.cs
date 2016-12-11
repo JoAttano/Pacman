@@ -21,11 +21,11 @@ namespace Pacman
 
         private void CreateTable()
         {
-            tableMap = new int[36,28];
+            tableMap = new int[map.MapHighTile, map.MapWideTile];
             int n = 0;
-            for (int y = 0; y < 36; y++)
+            for (int y = 0; y < map.MapHighTile; y++)
             {
-                for(int x = 0; x < 28; x++)
+                for(int x = 0; x < map.MapWideTile; x++)
                 {
                     tableMap[y, x] = map.Tmx.Layers[0].Tiles[n].Gid;
                     n++;
@@ -40,7 +40,7 @@ namespace Pacman
             int y = (((int)position.Y / 8));//  mapHeight;
             bool collide = false;
 
-            Console.WriteLine("x{0} y{1}",x, y);
+            //Console.WriteLine("x{0} y{1}",x, y);
 
             if (tableMap[y,x] >= 1)
             collide = true;

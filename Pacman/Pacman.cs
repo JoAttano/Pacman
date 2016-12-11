@@ -25,7 +25,7 @@ namespace Pacman
 
         public Pacman()
         {
-            position = new Vector2(150, 150);
+            position = new Vector2(0, 0);
             nFrame = 0f;
             recFrame = new Rectangle(0, 0, 16, 16);
             direction = "";
@@ -91,13 +91,14 @@ namespace Pacman
 
         private void MovingCharacter(KeyboardState keyState)
         {
-
+            
             if (keyState.IsKeyDown(Keys.Left))
             {
-                if (!collision.Colide(new Vector2 (position.X-8,position.Y)))
+                if (!collision.Colide(new Vector2(position.X - 9, position.Y - 7)) &&
+                        !collision.Colide(new Vector2(position.X - 9, position.Y + 7)))
                 {
-                    verticallyFlip = false;
                     direction = "left";
+                    verticallyFlip = false;
                     orientationSprite = 0f;
                     horizontallyFlip = true;
                 }
@@ -105,10 +106,12 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Right))
             {
-                if (!collision.Colide(new Vector2(position.X + 8, position.Y)))
+                
+                if (!collision.Colide(new Vector2(position.X + 9, position.Y - 7)) &&
+                        !collision.Colide(new Vector2(position.X + 9, position.Y + 7)))
                 {
-                    verticallyFlip = false;
                     direction = "right";
+                    verticallyFlip = false;
                     horizontallyFlip = false;
                     orientationSprite = 0f;
                 }
@@ -116,41 +119,61 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Up))
             {
-                if (!collision.Colide(new Vector2(position.X, position.Y - 8)))
+              
+                
+                if (!collision.Colide(new Vector2(position.X - 7, position.Y - 9)) &&
+                        !collision.Colide(new Vector2(position.X + 7, position.Y - 9)))
                 {
-                    verticallyFlip = true;
                     direction = "up";
+                    verticallyFlip = true;
                     orientationSprite = 4.71f;
                 }
+
             }
 
             else if (keyState.IsKeyDown(Keys.Down))
             {
-                if (!collision.Colide(new Vector2(position.X, position.Y + 8)))
+               
+                
+                if (!collision.Colide(new Vector2(position.X - 7, position.Y + 9)) &&
+                        !collision.Colide(new Vector2(position.X + 7, position.Y + 9)))
                 {
-                    verticallyFlip = true;
                     direction = "down";
+                    verticallyFlip = true;
                     orientationSprite = 1.57f;
                 }
+
             }
 
             switch (direction)
             {
                 case "left":
-                    if (!collision.Colide(new Vector2(position.X-8, position.Y)))
+                    if (!collision.Colide(new Vector2(position.X - 9, position.Y - 7)) &&
+                        !collision.Colide(new Vector2(position.X - 9, position.Y + 7)))
+                    {
                         position.X -= 1;
+                    }
                     break;
                 case "right":
-                    if (!collision.Colide(new Vector2(position.X+8, position.Y)))
+                    if (!collision.Colide(new Vector2(position.X + 9, position.Y - 7)) &&
+                        !collision.Colide(new Vector2(position.X + 9, position.Y + 7)))
+                    {
                         position.X += 1;
+                    }
                     break;
                 case "up":
-                    if (!collision.Colide(new Vector2(position.X, position.Y - 8)))
+                    if (!collision.Colide(new Vector2(position.X - 7, position.Y - 9)) &&
+                        !collision.Colide(new Vector2(position.X + 7, position.Y - 9)))
+                    {
                         position.Y -= 1;
+                    }
                     break;
                 case "down":
-                    if (!collision.Colide(new Vector2(position.X, position.Y + 8)))
+                    if (!collision.Colide(new Vector2(position.X - 7, position.Y + 9)) &&
+                        !collision.Colide(new Vector2(position.X + 7, position.Y + 9)))
+                    {
                         position.Y += 1;
+                    }
                     break;
                 default:
                     break;

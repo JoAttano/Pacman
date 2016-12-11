@@ -41,13 +41,9 @@ namespace Pacman
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            graphics.PreferredBackBufferWidth = 224;
-            graphics.PreferredBackBufferHeight = 288;
-            graphics.ApplyChanges();
-
             spriteBatch = new SpriteBatch(GraphicsDevice);
             level = new Level();
-            level.Load(Content);
+            level.Load(Content, graphics);
             // TODO: use this.Content to load your game content here
         }
 
