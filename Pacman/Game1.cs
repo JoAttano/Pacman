@@ -42,8 +42,11 @@ namespace Pacman
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            MyGlobals.SpaceTopScore = 40;
+            MyGlobals.SpaceBottomLife = 16;
             level = new Level();
             level.Load(Content, graphics);
+            
             // TODO: use this.Content to load your game content here
         }
 

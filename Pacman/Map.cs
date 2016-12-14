@@ -34,8 +34,7 @@ namespace Pacman
             TilesetTilesWide = tileset.Width / TileWidth;
             TilesetTilesHigh = tileset.Height / TileHeight;
             MapWidePixel = Tmx.Width * TileWidth;
-            MapHighPixel = Tmx.Height * TileHeight;
-            
+            MapHighPixel = Tmx.Height * TileHeight;      
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -61,8 +60,8 @@ namespace Pacman
                     Rectangle tilesetRec = new Rectangle(TileWidth * column, TileHeight * row,
                         TileWidth, TileHeight);
 
-                    spriteBatch.Draw(tileset, new Vector2((int)x, (int)y), tilesetRec, Color.White,
-                        0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(tileset, new Vector2((int)x, (int)y + MyGlobals.SpaceTopScore), tilesetRec,
+                        Color.White,0f, new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
 
                 }
             }

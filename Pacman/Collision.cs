@@ -37,10 +37,10 @@ namespace Pacman
         public bool Colide(Vector2 position)
         {
             int x = (((int)position.X / 8));//  mapWidth;
-            int y = (((int)position.Y / 8));//  mapHeight;
+            int y = (((int)(position.Y - MyGlobals.SpaceTopScore) / 8));//  mapHeight;
             bool collide = false;
 
-            //Console.WriteLine("x{0} y{1}",x, y);
+            Console.WriteLine("x{0} y{1}",x, y);
 
             if (tableMap[y,x] >= 1)
             collide = true;

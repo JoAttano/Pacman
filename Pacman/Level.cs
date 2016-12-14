@@ -19,9 +19,11 @@ namespace Pacman
             map.Load(Content);
             collision = new Collision(map);
             graphics.PreferredBackBufferWidth = map.MapWidePixel;
-            graphics.PreferredBackBufferHeight = map.MapHighPixel;
+            graphics.PreferredBackBufferHeight = map.MapHighPixel + MyGlobals.SpaceTopScore
+                + MyGlobals.SpaceBottomLife;
             graphics.ApplyChanges();
-            pacman = new Pacman(new Vector2(map.MapWidePixel /2, map.MapHighPixel /2 ), collision);
+            pacman = new Pacman(new Vector2((float)map.Tmx.ObjectGroups["Object"].Objects[0].X
+                , (float)map.Tmx.ObjectGroups["Object"].Objects[0].Y + MyGlobals.SpaceTopScore), collision);
             pacman.Load(Content);
             
         }
