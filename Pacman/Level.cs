@@ -23,7 +23,7 @@ namespace Pacman
                 + MyGlobals.SpaceBottomLife;
             graphics.ApplyChanges();
             pacman = new Pacman(new Vector2((float)map.Tmx.ObjectGroups["Object"].Objects[0].X
-                , (float)map.Tmx.ObjectGroups["Object"].Objects[0].Y + MyGlobals.SpaceTopScore), collision);
+                , (float)map.Tmx.ObjectGroups["Object"].Objects[0].Y + MyGlobals.SpaceTopScore), collision, map);
             pacman.Load(Content);
             
         }

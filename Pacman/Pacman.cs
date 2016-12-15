@@ -22,6 +22,7 @@ namespace Pacman
         private bool verticallyFlip;
         private bool horizontallyFlip;
         Collision collision;
+        Map map;
 
         public Pacman()
         {
@@ -31,10 +32,11 @@ namespace Pacman
             direction = "";
         }
 
-        public Pacman(Vector2 pPosition, Collision pCollision)
+        public Pacman(Vector2 pPosition, Collision pCollision, Map pMap)
         {
             position = pPosition;
             collision = pCollision;
+            map = pMap;
             
         }
         public void Load(ContentManager Content)
@@ -148,20 +150,37 @@ namespace Pacman
             switch (direction)
             {
                 case "left":
+
+                    if(position.X <= 1)
+                    {
+                        position.X = map.MapWidePixel -9;
+                    }
                     if (!collision.Colide(new Vector2(position.X - 9, position.Y - 7)) &&
                         !collision.Colide(new Vector2(position.X - 9, position.Y + 7)))
                     {
                         position.X -= 1;
                     }
+ 
                     break;
                 case "right":
+
+                    if(position.X >= map.MapWidePixel-10)
+                    {
+                        position.X = 0+9;
+                    }
                     if (!collision.Colide(new Vector2(position.X + 9, position.Y - 7)) &&
                         !collision.Colide(new Vector2(position.X + 9, position.Y + 7)))
                     {
                         position.X += 1;
                     }
+
+
                     break;
                 case "up":
+                    if (position.Y <= MyGlobals.SpaceTopScore + 10)
+                    {
+                        position.Y = map.MapHighPixel + MyGlobals.SpaceTopScore - 9;
+                    }
                     if (!collision.Colide(new Vector2(position.X - 7, position.Y - 9)) &&
                         !collision.Colide(new Vector2(position.X + 7, position.Y - 9)))
                     {
@@ -169,6 +188,10 @@ namespace Pacman
                     }
                     break;
                 case "down":
+                    if(position.Y >= map.MapHighPixel + MyGlobals.SpaceTopScore - 10)
+                    {
+                        position.Y = MyGlobals.SpaceTopScore +9;
+                    }
                     if (!collision.Colide(new Vector2(position.X - 7, position.Y + 9)) &&
                         !collision.Colide(new Vector2(position.X + 7, position.Y + 9)))
                     {
