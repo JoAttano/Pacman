@@ -38,10 +38,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Character.cs" />
+    <Compile Include="Ghost.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="MyEnums.cs" />
     <Compile Include="MyGlobals.cs" />
     <Compile Include="Pacman.cs" />
     <Compile Include="Program.cs" />
@@ -86,13 +89,8 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\map\pacman.tmx">
+    <None Include="Content\map\map.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Content\map\pacmanMap2.tmx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

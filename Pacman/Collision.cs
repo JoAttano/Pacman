@@ -8,7 +8,7 @@ using TiledSharp;
 
 namespace Pacman
 {
-    class Collision
+    public class Collision
     {
         Map map;
         int[,] tableMap;
@@ -43,7 +43,7 @@ namespace Pacman
             Console.WriteLine("x{0} y{1}",x, y);
 
             if (tableMap[y,x] >= 1)
-            collide = true;
+                collide = true;
 
             return collide;
         }

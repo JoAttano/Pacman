@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework;
 
 namespace Pacman
 {
-    class Map
+    public class Map
     {
         public TmxMap Tmx { get; private set; }
         private Texture2D tileset;
@@ -26,7 +26,7 @@ namespace Pacman
         public void Load(ContentManager Content)
         {
             tileset = Content.Load<Texture2D>("TileMap/PacmanBorder");
-            Tmx = new TmxMap("Content/map/pacmanMap2.tmx");
+            Tmx = new TmxMap("Content/map/map.tmx");
             TileWidth = Tmx.Tilesets[0].TileWidth;
             TileHeight = Tmx.Tilesets[0].TileHeight;
             MapWideTile = Tmx.Width;

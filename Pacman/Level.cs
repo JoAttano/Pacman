@@ -12,6 +12,7 @@ namespace Pacman
         Pacman pacman;
         Collision collision;
         Map map;
+        GhostRed ghostred;
 
         public void Load(ContentManager Content, GraphicsDeviceManager graphics)
         {
@@ -25,12 +26,16 @@ namespace Pacman
             pacman = new Pacman(new Vector2((float)map.Tmx.ObjectGroups["Object"].Objects[0].X
                 , (float)map.Tmx.ObjectGroups["Object"].Objects[0].Y + MyGlobals.SpaceTopScore), collision, map);
             pacman.Load(Content);
-            
+            ghostred = new GhostRed(new Vector2((float)map.Tmx.ObjectGroups["Object"].Objects[1].X,
+                (float)map.Tmx.ObjectGroups["Object"].Objects[1].Y + MyGlobals.SpaceTopScore), collision, map, pacman);
+            ghostred.Load(Content);
         }
 
         public void Update(GameTime gameTime, KeyboardState keyState)
         {
             pacman.Update(gameTime, keyState);
+            ghostred.Update(gameTime);
+
         }
        
 
@@ -38,6 +43,7 @@ namespace Pacman
         {
             map.Draw(spriteBatch);
             pacman.Draw(spriteBatch);
+            ghostred.Draw(spriteBatch);
         }
         
     }

@@ -11,66 +11,51 @@ using TiledSharp;
 
 namespace Pacman
 {
-    class Pacman
-    {
-        private Texture2D sprite;
-        private Vector2 position;
-        private Rectangle recFrame;
-        private float nFrame;
-        private string direction;
-        private float orientationSprite;
-        private bool verticallyFlip;
-        private bool horizontallyFlip;
-        Collision collision;
-        Map map;
 
-        public Pacman()
-        {
-            position = new Vector2(0, 0);
-            nFrame = 0f;
-            recFrame = new Rectangle(0, 0, 16, 16);
-            direction = "";
-        }
+    public class Pacman : Character
+    {
+        private float nFrame; // 
+        private Rectangle recFrame;
+        private SpriteEffects spriteEffects = SpriteEffects.None;
+        private float orientationSprite;
 
         public Pacman(Vector2 pPosition, Collision pCollision, Map pMap)
         {
             position = pPosition;
             collision = pCollision;
             map = pMap;
-            
+            speed = 1f;
+
         }
-        public void Load(ContentManager Content)
+       
+        public override void Load(ContentManager content)
         {
-            sprite = Content.Load<Texture2D>("Sprites/pacman/PacmanTileSet");
+            sprite = content.Load<Texture2D>("Sprites/pacman/PacmanTileSet");
             nFrame = 0f;
             recFrame = new Rectangle(0, 0, 16, 16);
-            direction = "";
+            direction = Direction.None;
+            
         }
 
-        public void Update(GameTime gameTime, KeyboardState keyState)
+        public override void Update(GameTime gameTime)
+        {
+        }
+
+        public override void Update(GameTime gameTime, KeyboardState keyState)
         {
             AnimatedSprite();
-            MovingCharacter(keyState);
+            ChangeDirection(keyState);
+            MovingCharacter();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
-            if (horizontallyFlip)
-            {
-                if(verticallyFlip)
-                spriteBatch.Draw(sprite, position, recFrame, Color.White, orientationSprite, new Vector2(8, 8), 1f, SpriteEffects.FlipVertically, 0f);
-                else
-                spriteBatch.Draw(sprite, position, recFrame, Color.White, orientationSprite, new Vector2(8, 8), 1f, SpriteEffects.FlipHorizontally, 0f);
-
-            }
-            else
-                spriteBatch.Draw(sprite, position, recFrame, Color.White, orientationSprite, new Vector2(8, 8), 1f, SpriteEffects.None, 0f);
-
+            spriteBatch.Draw(sprite, position, recFrame, Color.White, orientationSprite,
+                new Vector2(8, 8), 1f, spriteEffects, 0f);
 
             spriteBatch.End();
-
         }
 
         private void AnimatedSprite()
@@ -81,53 +66,51 @@ namespace Pacman
             {
                 recFrame = new Rectangle(0, 0, 16, 16);
 
-            }
-
-            else
+            }else
             {
                 recFrame = new Rectangle(16, 0, 16, 16);
+
                 if (nFrame >= 2f)
                     nFrame = 0f;
             }
         }
 
-        private void MovingCharacter(KeyboardState keyState)
+        private void ChangeDirection(KeyboardState keyState)
         {
-            
             if (keyState.IsKeyDown(Keys.Left))
             {
                 if (!collision.Colide(new Vector2(position.X - 9, position.Y - 7)) &&
                         !collision.Colide(new Vector2(position.X - 9, position.Y + 7)))
                 {
-                    direction = "left";
-                    verticallyFlip = false;
+                    
+                    direction = Direction.Left;
+                    spriteEffects = SpriteEffects.FlipHorizontally;
+                    
                     orientationSprite = 0f;
-                    horizontallyFlip = true;
+                    
                 }
             }
 
             else if (keyState.IsKeyDown(Keys.Right))
             {
-                
+
                 if (!collision.Colide(new Vector2(position.X + 9, position.Y - 7)) &&
                         !collision.Colide(new Vector2(position.X + 9, position.Y + 7)))
                 {
-                    direction = "right";
-                    verticallyFlip = false;
-                    horizontallyFlip = false;
+                    direction = Direction.Right;
+                    spriteEffects = SpriteEffects.None;
                     orientationSprite = 0f;
                 }
             }
 
             else if (keyState.IsKeyDown(Keys.Up))
             {
-              
-                
+
                 if (!collision.Colide(new Vector2(position.X - 7, position.Y - 9)) &&
                         !collision.Colide(new Vector2(position.X + 7, position.Y - 9)))
                 {
-                    direction = "up";
-                    verticallyFlip = true;
+                    direction = Direction.Up;
+                    spriteEffects = SpriteEffects.FlipVertically;
                     orientationSprite = 4.71f;
                 }
 
@@ -135,71 +118,14 @@ namespace Pacman
 
             else if (keyState.IsKeyDown(Keys.Down))
             {
-               
-                
+
                 if (!collision.Colide(new Vector2(position.X - 7, position.Y + 9)) &&
                         !collision.Colide(new Vector2(position.X + 7, position.Y + 9)))
                 {
-                    direction = "down";
-                    verticallyFlip = true;
+                    direction = Direction.Down;
+                    spriteEffects = SpriteEffects.FlipVertically;
                     orientationSprite = 1.57f;
                 }
-
-            }
-
-            switch (direction)
-            {
-                case "left":
-
-                    if(position.X <= 1)
-                    {
-                        position.X = map.MapWidePixel -9;
-                    }
-                    if (!collision.Colide(new Vector2(position.X - 9, position.Y - 7)) &&
-                        !collision.Colide(new Vector2(position.X - 9, position.Y + 7)))
-                    {
-                        position.X -= 1;
-                    }
- 
-                    break;
-                case "right":
-
-                    if(position.X >= map.MapWidePixel-10)
-                    {
-                        position.X = 0+9;
-                    }
-                    if (!collision.Colide(new Vector2(position.X + 9, position.Y - 7)) &&
-                        !collision.Colide(new Vector2(position.X + 9, position.Y + 7)))
-                    {
-                        position.X += 1;
-                    }
-
-
-                    break;
-                case "up":
-                    if (position.Y <= MyGlobals.SpaceTopScore + 10)
-                    {
-                        position.Y = map.MapHighPixel + MyGlobals.SpaceTopScore - 9;
-                    }
-                    if (!collision.Colide(new Vector2(position.X - 7, position.Y - 9)) &&
-                        !collision.Colide(new Vector2(position.X + 7, position.Y - 9)))
-                    {
-                        position.Y -= 1;
-                    }
-                    break;
-                case "down":
-                    if(position.Y >= map.MapHighPixel + MyGlobals.SpaceTopScore - 10)
-                    {
-                        position.Y = MyGlobals.SpaceTopScore +9;
-                    }
-                    if (!collision.Colide(new Vector2(position.X - 7, position.Y + 9)) &&
-                        !collision.Colide(new Vector2(position.X + 7, position.Y + 9)))
-                    {
-                        position.Y += 1;
-                    }
-                    break;
-                default:
-                    break;
 
             }
         }
